@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-
 QT_BEGIN_NAMESPACE
+
 namespace Ui {
 class Widget;
 }
@@ -15,7 +15,8 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    bool swi=0; //服务器开关状态
+    //服务器开关状态
+    bool swi=0;
 
 public:
     Widget(QWidget *parent = nullptr);
