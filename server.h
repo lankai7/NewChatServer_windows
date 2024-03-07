@@ -6,6 +6,7 @@
 #include "tcpSocket.h"
 #include "fileOperation.h"
 using namespace std;
+/*服务器*/
 
 typedef struct client_node {
     SOCKET sock;
