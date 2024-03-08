@@ -81,7 +81,9 @@ void child_connect(SOCKET clifd, SOCKET serfd) {
     while (1) {
         clifd = accept(serfd, NULL, NULL);
         if (clifd == INVALID_SOCKET) {
-            continue;
+            thread proc0(child_connect, clifd, serfd);
+            proc0.detach();
+            break;
         }
         cout << "连接成功..." << endl;
         thread proc(child_func, clifd);
