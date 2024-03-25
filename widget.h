@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "Server.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -22,12 +23,15 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    Ui::Widget *ui;
+
 private slots:
     //服务器开关按钮
     void on_ser1_on_clicked();
-
+    void logGet(const QString logData);
 private:
-    Ui::Widget *ui;
 
 };
+
+
 #endif // WIDGET_H

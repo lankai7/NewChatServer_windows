@@ -1,4 +1,4 @@
-#include "tcpSocket.h"
+#include "tcpsocket.h"
 #include<iostream>
 
 using namespace std;

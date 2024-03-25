@@ -9,16 +9,17 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Server.cpp \
     fileOperation.cpp \
+    logData.cpp \
     main.cpp \
-    server.cpp \
     tcpSocket.cpp \
     widget.cpp
 
 HEADERS += \
-    FileServer.h \
+    Server.h \
     fileOperation.h \
-    server.h \
+    logData.h \
     tcpSocket.h \
     widget.h
 
