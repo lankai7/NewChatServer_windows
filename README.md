@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./res/bak/bak1.png" alt="icon"/>
+<img src="./icon/bak1.png" alt="icon"/>
 
  <h1 align="center">NewChat(Server)</h1>
 	
