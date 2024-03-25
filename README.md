@@ -10,8 +10,7 @@ NewChat服务端----基于Qt框架的tcp聊天室服务器-windows版本（后�
 
 NewChat客户端：https://github.com/lankai7/NewChat.git
 
-[![standard-readme compliant]
-(https://camo.githubusercontent.com/da0e1f4bf0a54a3283639676aa88bfcc5b3ee3377e9246b6de813371e17cf54e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d57696e646f77732d626c75653f6c6f676f3d77696e646f7773)](https://github.com/lankai7/NewChatServer_windows/tree/master)
+[![standard-readme compliant](https://camo.githubusercontent.com/da0e1f4bf0a54a3283639676aa88bfcc5b3ee3377e9246b6de813371e17cf54e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d57696e646f77732d626c75653f6c6f676f3d77696e646f7773)](https://github.com/lankai7/NewChatServer_windows/tree/master)
 
 [客户端](https://github.com/lankai7/NewChat.git) / [服务端](https://github.com/lankai7/NewChatServer_windows) / [反馈](https://github.com/lankai7/NewChatServer_windows/issues)
 
