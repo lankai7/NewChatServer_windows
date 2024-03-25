@@ -3,18 +3,27 @@
 #define  __FILEOP_H__
 #include "tcpSocket.h"
 
-/*******服务器********/
-//读取文件（读）
-bool readFile(const char* fileName);
+class fileoperation{
+public:
+    long g_fileSize;	//保存文件大小
+    string g_fileBuf;	//保存文件数据
 
-//发文件
-bool sendFile(SOCKET s, const char* fileName);
+    //读取文件（读）
+    bool readFile(const char* fileName);
 
-/*******客户端********/
-//接收文件
-bool recvFile(SOCKET s, const char* fileName);
+    //发文件
+    bool sendFile(SOCKET s);
 
-//保存文件（写）
-bool saveFile(const char* fileName);
+    /*******客户端********/
+    //接收文件
+    bool recvFile(SOCKET s);
+
+    //保存文件（写）
+    bool saveFile(const char* fileName);
+
+    //获取数据
+    void getSize(long num);
+};
+
 
 #endif

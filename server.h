@@ -4,7 +4,14 @@
 #include <iostream>
 #include <thread>
 #include "tcpSocket.h"
-#include "fileOperation.h"
+#include <QByteArray>
+#include <QDebug>
+
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
 using namespace std;
 /*服务器*/
 
@@ -29,48 +36,86 @@ void remove_client(client_node_t* p) {
     }
 }
 
+
 void child_func(SOCKET clifd) {
     int ret;
-    char recvBuf[1024] = "";
+    char recvName[256] = "";
+    char recvType[256] = "";
+    char recvData[102400] = "";
+
+    long g_num;
+    char* g_data;
     client_node_t* cur;//dang qian de client
     //可以与客户端进行通信了
-    memset(recvBuf, 0, sizeof(recvBuf));
+    memset(recvName, 0, sizeof(recvName));
 
-    ret = recv(clifd, recvBuf, sizeof(recvBuf), 0);
+    ret = recv(clifd, recvName, sizeof(recvName), 0);
     //xian shou yi ge yong hu ming
     if (ret == 0) {
-        cout << "客户端ddd正常下线..." << endl;
+        qDebug() << "client off..." << endl;
     }
     else if (ret < 0) {
         err("recv");
     }
     cur = (client_node_t*)malloc(sizeof(client_node_t));
     cur->sock = clifd;
-    strcpy(cur->name, recvBuf);
+    strcpy(cur->name, recvName);
     add_client(cur);
     while (1) {
-        memset(recvBuf, 0, sizeof(recvBuf));
-        ret = recv(clifd, recvBuf, sizeof(recvBuf), 0);
-        if (ret == 0) {
-            cout << "客户端正常下线..." << endl;
+        memset(recvType, 0, sizeof(recvType));
+        memset(recvData, 0, sizeof(recvData));
+        int retType = recv(clifd, recvType, sizeof(recvType), 0);
+        int retData = recv(clifd, recvData, sizeof(recvData), 0);
+
+        if(strcmp(recvType, "type_pic_") == 0){
+            char* endptr;
+            g_num = std::strtol(recvData, &endptr, 10);
+            g_data = new char[g_num];
+            int ret = recv(clifd, g_data, g_num, 0);
+            if (ret == 0) {
+                qDebug() << "服务器正常" << endl;
+            }
+            else if (ret < 0) {
+                err("recv");
+            }
+
+        }
+
+        if (retType <= 0||retData <= 0) {
+            qDebug() << "client off..." << endl;
             break;
         }
-        else if (ret < 0) {
-            err("recv");
-            break;
-        }
-        cout << "received:" << recvBuf << endl;
+
+        qDebug() << recvType <<":" << recvData << endl;
         client_node_t* p = g_client;
         while (p) {
             if (p != cur) {
-                char msg[1024];
-                sprintf(msg, "%s:%s", cur->name, recvBuf);
-                send(p->sock, msg, sizeof(msg), 0);
+                //char msg[1024];
+                //sprintf(msg, "%s:%s", cur->name, recvBuf);    //合并名字与文本（弃用）
+                send(p->sock, cur->name, sizeof(cur->name), 0);
+                send(p->sock, recvType, sizeof(recvType), 0);
+                if(strcmp(recvType, "type_pic_") == 0){
+                    std::string str = std::to_string(g_num);
+                    const char* buffer = str.c_str();
+                    retData = send(p->sock, buffer, sizeof(buffer), 0);
+
+                    int ret = send(p->sock, g_data, g_num, 0);
+                    if (ret == SOCKET_ERROR) {
+                        err("sendFile");
+                    }
+                    delete[] g_data;
+                    qDebug() << "发送成功：" << g_num << "Byte" << endl;
+                }
+                else if(strcmp(recvType, "type_msg_") == 0||strcmp(recvType, "type_sys_") == 0){
+                    int ret0 = send(p->sock, recvData, sizeof(recvData), 0);
+                    if (ret0 == SOCKET_ERROR) {
+                        err("sendFile");
+                    }
+                }
+
             }
             p = p->next;
         }
-        if (strcmp(recvBuf, "over") == 0)
-            break;
     }
     remove_client(cur);
     free(cur);
@@ -85,19 +130,21 @@ void child_connect(SOCKET clifd, SOCKET serfd) {
             proc0.detach();
             break;
         }
-        cout << "连接成功..." << endl;
+        qDebug() << "connect successed..." << endl;
         thread proc(child_func, clifd);
         proc.detach();
     }
 }
 
+
+
 class Server {
 public:
-    Server() {
+    Server(const char* ip, unsigned short PORT) {
         init_Socket();
 
-        serfd = create_serverSocket();
-        cout << "server create successed ,wait for client connet..." << endl;
+        serfd = create_serverSocket(ip,PORT);
+        qDebug() << "server create successed ,wait for client connet..." << endl;
 
         //等待客户端连接
         thread proc0(child_connect, clifd, serfd);

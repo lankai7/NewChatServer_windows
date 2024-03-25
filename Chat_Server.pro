@@ -11,10 +11,12 @@ CONFIG += c++17
 SOURCES += \
     fileOperation.cpp \
     main.cpp \
+    server.cpp \
     tcpSocket.cpp \
     widget.cpp
 
 HEADERS += \
+    FileServer.h \
     fileOperation.h \
     server.h \
     tcpSocket.h \

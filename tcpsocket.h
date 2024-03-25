@@ -12,6 +12,8 @@
 
 /*tcp网络连接*/
 
+using namespace std;
+
 //报错宏定义
 #define err(errMsg) printf("[Error] %s failed,code: %d line:%d \n",errMsg,WSAGetLastError(),__LINE__);
 
@@ -20,14 +22,11 @@ bool init_Socket();
 //关闭网络库
 bool close_Socket();
 
-//服务器：创建服务器socket ---服务端使用
-/*SOCKET create_serverSocket();*/
-
 //服务器：创建服务器socket
-SOCKET create_serverSocket();
-
+SOCKET create_serverSocket(const char* ip, const int PORT);
+/*
 //客户端：创建客户端socket
 SOCKET create_clientSocket(const char* ip);
-
+*/
 
 #endif

@@ -5,10 +5,8 @@
 #include <sstream>
 
 using namespace std;
-long g_fileSize;	//保存文件大小
-string g_fileBuf;	//保存文件数据
 
-bool readFile(const char* fileName)
+bool fileoperation::readFile(const char* fileName)
 {
     ifstream read;
     read.open(fileName, ios::binary);
@@ -28,9 +26,8 @@ bool readFile(const char* fileName)
     return true;
 }
 
-bool sendFile(SOCKET s, const char* fileName)
+bool fileoperation::sendFile(SOCKET s)
 {
-    readFile(fileName);
     const char* buf = g_fileBuf.c_str();
     int ret = send(s, buf, g_fileSize, 0);
     if (ret == SOCKET_ERROR) {
@@ -42,7 +39,7 @@ bool sendFile(SOCKET s, const char* fileName)
     return false;
 }
 
-bool recvFile(SOCKET s, const char* fileName)
+bool fileoperation::recvFile(SOCKET s)
 {
     char* buf;
     buf = new char[g_fileSize];
@@ -54,23 +51,29 @@ bool recvFile(SOCKET s, const char* fileName)
         err("recv");
     }
     g_fileBuf = buf;
-    saveFile(fileName);
-
+    saveFile("fileName");
     delete[] buf;
     return false;
 }
 
-bool saveFile(const char* fileName)
+bool fileoperation::saveFile(const char* fileName)
 {
     ofstream write;
-    write.open(fileName, ios::binary);
+    write.open("fileName.png", ios::binary);
     if (!write) {
         cout << "file open failed: write" << endl;
         return false;
     }
 
-    write << g_fileBuf;
+    write << fileName;
 
     write.close();
     return true;
 }
+
+void fileoperation::getSize(long num)
+{
+    g_fileSize = num;
+}
+
+
