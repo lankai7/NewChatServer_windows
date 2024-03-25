@@ -1,6 +1,8 @@
 <div align="center">
-	
-### NewChatServer
+
+<img src="./res/bak/bak1.png" alt="icon"/>
+
+ <h1 align="center">NewChat(Server)</h1>
 	
 NewChat服务端----基于Qt框架的tcp聊天室服务器-windows版本（后续会有linux版）
 
