@@ -50,7 +50,7 @@ Chat_Server 服务器为用户提供了一个方便、实时的聊天室平台�
 - [使用说明](#使用说明)
 	- [打包](#打包)
 - [徽章](#徽章)
-- [示例](#示例)
+- [更新](#更新)
 - [相关仓库](#相关仓库)
 - [维护者](#维护者)
 - [如何贡献](#如何贡献)
@@ -179,9 +179,9 @@ windeployqt Chat_Server.exe
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-## 示例
+## 更新
 
-暂无
+- 🚀 v1.0 已经发布，现在你可以简洁的创建聊天服务器，简便的控制服务器开关，查看服务器日志文件！
 
 ## 相关仓库
 
