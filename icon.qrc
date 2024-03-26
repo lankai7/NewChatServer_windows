@@ -7,4 +7,9 @@
         <file>icon/swi_btn.png</file>
         <file>icon/bak1.png</file>
     </qresource>
+    <qresource prefix="/res/pic">
+        <file>res/pic/background.jpg</file>
+        <file>res/pic/NewChat.png</file>
+        <file>res/pic/background2.png</file>
+    </qresource>
 </RCC>

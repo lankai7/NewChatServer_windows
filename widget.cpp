@@ -30,12 +30,13 @@ void Widget::on_ser1_on_clicked()
     if(this->swi == 0){
         QString time = log->getTime();
         emit log->logPut("[" + time + "]" + "服务器开启中...\n");
-        ser1 = new Server("127.0.0.1",9999);
+        ser1 = new Server(this->s_ip, this->s_PROT);
         this->setWindowIcon(QIcon("://icon/on.png"));
         this->swi=1;
     }
     else if(this->swi==1){
         delete ser1;
+        this->setWindowIcon(QIcon("://icon/off.png"));
         this->swi=0;
         QString time = log->getTime();
         emit log->logPut("[" + time + "]" + "服务器关闭成功\n");

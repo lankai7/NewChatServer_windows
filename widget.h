@@ -30,7 +30,9 @@ private slots:
     void on_ser1_on_clicked();
     void logGet(const QString logData);
 private:
-
+    //ip与端口号
+    const char* s_ip = "127.0.0.1";
+    const int s_PROT = 9999;
 };
 
 
