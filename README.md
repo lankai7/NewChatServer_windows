@@ -1,6 +1,6 @@
 <div align="center">
-
-<img src="./icon/bak1.png" alt="icon"/>
+	
+![bak1](https://github.com/lankai7/NewChatServer_windows/assets/133182950/fd717fc9-48a0-4e54-91d5-ebbc64feb575)
 
  <h1 align="center">NewChat(Client)</h1>
 
